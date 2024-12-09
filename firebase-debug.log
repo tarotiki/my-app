@@ -1,0 +1,63 @@
+[debug] [2024-12-08T21:36:28.159Z] ----------------------------------------------------------------------
+[debug] [2024-12-08T21:36:28.163Z] Command:       /usr/local/bin/node /usr/local/bin/firebase emulators:start
+[debug] [2024-12-08T21:36:28.163Z] CLI Version:   13.28.0
+[debug] [2024-12-08T21:36:28.163Z] Platform:      darwin
+[debug] [2024-12-08T21:36:28.164Z] Node Version:  v22.12.0
+[debug] [2024-12-08T21:36:28.164Z] Time:          Mon Dec 09 2024 06:36:28 GMT+0900 (日本標準時)
+[debug] [2024-12-08T21:36:28.164Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2024-12-08T21:36:28.170Z] >>> [apiv2][query] GET https://firebase-public.firebaseio.com/cli.json [none]
+[debug] [2024-12-08T21:36:28.381Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2024-12-08T21:36:28.382Z] > authorizing via signed-in user (plants.broker.tokyo@gmail.com)
+[info] i  emulators: Starting emulators: hosting {"metadata":{"emulator":{"name":"hub"},"message":"Starting emulators: hosting"}}
+[debug] [2024-12-08T21:36:28.862Z] [logging] Logging Emulator only supports listening on one address (127.0.0.1). Not listening on ::1
+[debug] [2024-12-08T21:36:28.862Z] [hosting] Hosting Emulator only supports listening on one address (127.0.0.1). Not listening on ::1
+[debug] [2024-12-08T21:36:28.863Z] assigned listening specs for emulators {"user":{"hub":[{"address":"127.0.0.1","family":"IPv4","port":4400},{"address":"::1","family":"IPv6","port":4400}],"logging":[{"address":"127.0.0.1","family":"IPv4","port":4500}],"hosting":[{"address":"127.0.0.1","family":"IPv4","port":5000}]},"metadata":{"message":"assigned listening specs for emulators"}}
+[debug] [2024-12-08T21:36:28.870Z] [hub] writing locator at /var/folders/g7/_q9b43j11dx0h_l7yc921gg00000gn/T/hub-my-first-project-9eef9.json
+[debug] [2024-12-08T21:36:28.900Z] Checked if tokens are valid: false, expires at: 1733644622102
+[debug] [2024-12-08T21:36:28.901Z] Checked if tokens are valid: false, expires at: 1733644622102
+[debug] [2024-12-08T21:36:28.901Z] > refreshing access token with scopes: []
+[debug] [2024-12-08T21:36:28.903Z] >>> [apiv2][query] POST https://www.googleapis.com/oauth2/v3/token [none]
+[debug] [2024-12-08T21:36:28.903Z] >>> [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2024-12-08T21:36:29.041Z] <<< [apiv2][status] POST https://www.googleapis.com/oauth2/v3/token 200
+[debug] [2024-12-08T21:36:29.041Z] <<< [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2024-12-08T21:36:29.072Z] >>> [apiv2][query] GET https://firebasehosting.googleapis.com/v1beta1/projects/my-first-project-9eef9/sites 
+[debug] [2024-12-08T21:36:29.239Z] <<< [apiv2][status] GET https://firebase-public.firebaseio.com/cli.json 200
+[debug] [2024-12-08T21:36:29.239Z] <<< [apiv2][body] GET https://firebase-public.firebaseio.com/cli.json {"cloudBuildErrorAfter":1594252800000,"cloudBuildWarnAfter":1590019200000,"defaultNode10After":1594252800000,"minVersion":"3.0.5","node8DeploysDisabledAfter":1613390400000,"node8RuntimeDisabledAfter":1615809600000,"node8WarnAfter":1600128000000}
+[debug] [2024-12-08T21:36:29.932Z] <<< [apiv2][status] GET https://firebasehosting.googleapis.com/v1beta1/projects/my-first-project-9eef9/sites 200
+[debug] [2024-12-08T21:36:29.932Z] <<< [apiv2][body] GET https://firebasehosting.googleapis.com/v1beta1/projects/my-first-project-9eef9/sites {"sites":[{"name":"projects/my-first-project-9eef9/sites/my-first-project-9eef9","defaultUrl":"https://my-first-project-9eef9.web.app","appId":"1:958797586723:web:45be86491cbfda58a6ac96","type":"DEFAULT_SITE"}]}
+[debug] [2024-12-08T21:36:29.932Z] Checked if tokens are valid: true, expires at: 1733697388041
+[debug] [2024-12-08T21:36:29.933Z] Checked if tokens are valid: true, expires at: 1733697388041
+[debug] [2024-12-08T21:36:29.933Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/my-first-project-9eef9/webApps/1:958797586723:web:45be86491cbfda58a6ac96/config [none]
+[debug] [2024-12-08T21:36:30.848Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/my-first-project-9eef9/webApps/1:958797586723:web:45be86491cbfda58a6ac96/config 200
+[debug] [2024-12-08T21:36:30.848Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/my-first-project-9eef9/webApps/1:958797586723:web:45be86491cbfda58a6ac96/config {"projectId":"my-first-project-9eef9","appId":"1:958797586723:web:45be86491cbfda58a6ac96","databaseURL":"https://my-first-project-9eef9-default-rtdb.asia-southeast1.firebasedatabase.app","storageBucket":"my-first-project-9eef9.firebasestorage.app","apiKey":"AIzaSyDNqzL2kJPx859UavzqZsQ26UqLlROqujg","authDomain":"my-first-project-9eef9.firebaseapp.com","messagingSenderId":"958797586723","measurementId":"G-MEPK55WFZ7"}
+[debug] [2024-12-08T21:36:30.864Z] Checked if tokens are valid: true, expires at: 1733697388041
+[debug] [2024-12-08T21:36:30.864Z] Checked if tokens are valid: true, expires at: 1733697388041
+[debug] [2024-12-08T21:36:30.865Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/my-first-project-9eef9 [none]
+[debug] [2024-12-08T21:36:31.123Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/my-first-project-9eef9 200
+[debug] [2024-12-08T21:36:31.123Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/my-first-project-9eef9 {"projectId":"my-first-project-9eef9","projectNumber":"958797586723","displayName":"my-first-project","name":"projects/my-first-project-9eef9","resources":{"hostingSite":"my-first-project-9eef9","realtimeDatabaseInstance":"my-first-project-9eef9-default-rtdb"},"state":"ACTIVE","etag":"1_e4773817-038f-4c46-a8e1-4deff4a29dda"}
+[info] i  hosting[my-first-project-9eef9]: Serving hosting files from: build {"metadata":{"emulator":{"name":"hosting"},"message":"Serving hosting files from: \u001b[1mbuild\u001b[22m"}}
+[info] ✔  hosting[my-first-project-9eef9]: Local server: http://127.0.0.1:5000 {"metadata":{"emulator":{"name":"hosting"},"message":"Local server: \u001b[4m\u001b[1mhttp://127.0.0.1:5000\u001b[22m\u001b[24m"}}
+[warn] ⚠  emulators: The Emulator UI is not starting, either because none of the running emulators have a UI component or the Emulator UI cannot determine the Project ID. Pass the --project flag to specify a project. {"metadata":{"emulator":{"name":"hub"},"message":"The Emulator UI is not starting, either because none of the running emulators have a UI component or the Emulator UI cannot determine the Project ID. Pass the --project flag to specify a project."}}
+[debug] [2024-12-08T21:36:31.221Z] Could not find VSCode notification endpoint: FetchError: request to http://localhost:40001/vscode/notify failed, reason: . If you are not running the Firebase Data Connect VSCode extension, this is expected and not an issue.
+[info] 
+┌─────────────────────────────────────────────────────────────┐
+│ ✔  All emulators ready! It is now safe to connect your app. │
+└─────────────────────────────────────────────────────────────┘
+
+┌──────────┬────────────────┐
+│ Emulator │ Host:Port      │
+├──────────┼────────────────┤
+│ Hosting  │ 127.0.0.1:5000 │
+└──────────┴────────────────┘
+  Emulator Hub running at 127.0.0.1:4400
+  Other reserved ports: 4500
+
+Issues? Report them at https://github.com/firebase/firebase-tools/issues and attach the *-debug.log files.
+ 
+[info] i  hosting: 127.0.0.1 - - [08/Dec/2024:21:38:19 +0000] "GET / HTTP/1.1" 200 644 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36" {"metadata":{"emulator":{"name":"hosting"},"message":"127.0.0.1 - - [08/Dec/2024:21:38:19 +0000] \"GET / HTTP/1.1\" 200 644 \"-\" \"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36\""}}
+[info] i  hosting: 127.0.0.1 - - [08/Dec/2024:21:38:19 +0000] "GET /static/css/main.82075352.css HTTP/1.1" 200 - "http://127.0.0.1:5000/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36" {"metadata":{"emulator":{"name":"hosting"},"message":"127.0.0.1 - - [08/Dec/2024:21:38:19 +0000] \"GET /static/css/main.82075352.css HTTP/1.1\" 200 - \"http://127.0.0.1:5000/\" \"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36\""}}
+[info] i  hosting: 127.0.0.1 - - [08/Dec/2024:21:38:19 +0000] "GET /static/js/main.74851e29.js HTTP/1.1" 200 - "http://127.0.0.1:5000/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36" {"metadata":{"emulator":{"name":"hosting"},"message":"127.0.0.1 - - [08/Dec/2024:21:38:19 +0000] \"GET /static/js/main.74851e29.js HTTP/1.1\" 200 - \"http://127.0.0.1:5000/\" \"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36\""}}
+[info] i  hosting: 127.0.0.1 - - [08/Dec/2024:21:38:19 +0000] "GET /favicon.ico HTTP/1.1" 200 - "http://127.0.0.1:5000/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36" {"metadata":{"emulator":{"name":"hosting"},"message":"127.0.0.1 - - [08/Dec/2024:21:38:19 +0000] \"GET /favicon.ico HTTP/1.1\" 200 - \"http://127.0.0.1:5000/\" \"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36\""}}
+[info] i  hosting: 127.0.0.1 - - [08/Dec/2024:21:38:19 +0000] "GET /manifest.json HTTP/1.1" 200 492 "http://127.0.0.1:5000/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36" {"metadata":{"emulator":{"name":"hosting"},"message":"127.0.0.1 - - [08/Dec/2024:21:38:19 +0000] \"GET /manifest.json HTTP/1.1\" 200 492 \"http://127.0.0.1:5000/\" \"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36\""}}
+[info] i  hosting: 127.0.0.1 - - [08/Dec/2024:21:38:19 +0000] "GET /logo192.png HTTP/1.1" 200 5347 "http://127.0.0.1:5000/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36" {"metadata":{"emulator":{"name":"hosting"},"message":"127.0.0.1 - - [08/Dec/2024:21:38:19 +0000] \"GET /logo192.png HTTP/1.1\" 200 5347 \"http://127.0.0.1:5000/\" \"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36\""}}
