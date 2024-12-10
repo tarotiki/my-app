@@ -14,7 +14,7 @@ function UploadPrescription() {
     e.preventDefault(); // フォーム送信時にページリロードを防ぐ
 
     if (!file) {
-      alert("処方箋をアップロードしてください。");
+      alert("処方箋をアップロードしなさい！。");
       return;
     }
 
@@ -28,7 +28,7 @@ function UploadPrescription() {
 
     if (result) {
       // 処方箋アップロードが成功したら、Google Driveに保存する
-      const saveResult = await gdrive.saveImageToDrive(file); // gdrivehandlerを呼び出して画像を保存
+      const saveResult = await gdrive.saveImageToDrive(file,"1234"); // gdrivehandlerを呼び出して画像を保存
 
       if (saveResult) {
         alert("処方箋がアップロードされ、画像がGoogle Driveに保存されました。");

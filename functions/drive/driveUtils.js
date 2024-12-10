@@ -4,7 +4,6 @@ import {Readable} from "stream";
 import {config} from "firebase-functions";
 
 const GOOGLE_DRIVE_FOLDER_ID = config().drive.folder_id;
-
 /**
  * Saves an image to Google Drive in a specific folder.
  *
@@ -15,7 +14,7 @@ const GOOGLE_DRIVE_FOLDER_ID = config().drive.folder_id;
  * @throws {Error} Throws an error if the image cannot be fetched
  * or the file cannot be uploaded to Google Drive.
  */
-async function saveImageToDrive(image) {
+async function saveImageToDrive(imageUrl, userId) {
   const auth = new google.auth.GoogleAuth({
     scopes: ["https://www.googleapis.com/auth/drive"],
   });
@@ -25,7 +24,7 @@ async function saveImageToDrive(image) {
     auth: await auth.getClient(),
   });
 
-  const response = await axios.get(image, {
+  const response = await axios.get(imageUrl, {
     responseType: "arraybuffer",
   });
   const imageData = response.data;
