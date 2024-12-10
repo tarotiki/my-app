@@ -7,7 +7,7 @@ function Home() {
       <h1>薬局サービスへようこそ</h1>
       <div className="menu">
         <Link to="/upload" className="menu-link">
-          処方箋をアップロード
+          処方箋をアップ
         </Link>
         <Link to="/appointments" className="menu-link">
           予約一覧を見る
