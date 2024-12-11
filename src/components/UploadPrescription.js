@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import { uploadPrescription } from "../actions/prescriptionActions.js"; // uploadPrescriptionをインポート
-import { gdrive } from "../functions/driveUtils.js"; // 画像保存先との接続
+import { uploadPrescription, saveImageToDrive } from "../actions/prescriptionActions.js"; // 先ほど作成したアクションをインポート
 
 function UploadPrescription() {
   const [file, setFile] = useState(null);
   const [isUploading, setIsUploading] = useState(false); // アップロード中かどうかを管理
+  const [userId, setUserId] = useState("12345"); // ユーザーID（例として固定値）
 
   const handleUpload = (e) => {
     setFile(e.target.files[0]); // ユーザーが選択したファイルを状態に保存
@@ -14,45 +14,52 @@ function UploadPrescription() {
     e.preventDefault(); // フォーム送信時にページリロードを防ぐ
 
     if (!file) {
-      alert("処方箋をアップロードしなさい！。");
+      alert("処方箋をアップロードしなさい。");
       return;
     }
 
     setIsUploading(true); // アップロード中の状態にする
 
-    const formData = new FormData();
-    formData.append("prescription", file); // 画像をFormDataに追加
+    try {
+      // 1. 処方箋をサーバーにアップロード
+      const formData = new FormData();
+      formData.append("prescription", file);
 
-    // uploadPrescription関数を呼び出して、処方箋をアップロード
-    const result = await uploadPrescription(formData);
+      const result = await saveImageToDrive(file, userId);
+      if (result) {
+        // 2. アップロード成功時、クラウドファンクションを呼び出してGoogle Driveに保存
+        const saveResult = await saveImageToDrive(file, userId);
 
-    if (result) {
-      // 処方箋アップロードが成功したら、Google Driveに保存する
-      const saveResult = await gdrive.saveImageToDrive(file,"1234"); // gdrivehandlerを呼び出して画像を保存
-
-      if (saveResult) {
-        alert("処方箋がアップロードされ、画像がGoogle Driveに保存されました。");
+        if (saveResult.success) {
+          alert("処方箋がアップロードされ、画像がGoogle Driveに保存されました。");
+        } else {
+          alert(`画像の保存に失敗しました: ${saveResult.message || "不明なエラー"}`);
+        }
       } else {
-        alert("画像の保存に失敗しました。");
+        alert("処方箋のアップロードに失敗しました。");
       }
-    } else {
-      alert('処方箋のアップロードに失敗しました。');
+    } catch (error) {
+      console.error("エラー:", error);
+      alert("処理中にエラーが発生しました。");
+    } finally {
+      setIsUploading(false); // アップロード完了後、アップロード中の状態を解除
     }
-
-    // 少し待ってからブラウザを閉じる
-    setTimeout(() => {
-      window.close(); // ブラウザを閉じる
-    }, 2000); // 2秒後にブラウザを閉じる
-
-    setIsUploading(false); // アップロード完了後、アップロード中の状態を解除
   };
 
   return (
-    <div>
+    <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
       <h1>処方箋アップロード</h1>
-      <form onSubmit={handleSubmit}>
-        <input type="file" onChange={handleUpload} disabled={isUploading} />
-        <button type="submit" disabled={isUploading}>送信</button>
+      <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
+        <input
+          type="file"
+          onChange={handleUpload}
+          disabled={isUploading}
+          accept="image/*"
+          style={{ marginBottom: "10px" }}
+        />
+        <button type="submit" disabled={isUploading} style={{ padding: "10px", backgroundColor: "#4CAF50", color: "white", border: "none" }}>
+          {isUploading ? "アップロード中..." : "送信"}
+        </button>
       </form>
     </div>
   );

@@ -1,27 +1,26 @@
 import axios from "axios";
-import functions from "firebase-functions";
+import dotenv from "dotenv";
 
+dotenv.config();
 /**
  * LINEメッセージを返信する関数
  * @param {string} replyToken 返信トークン
- * @param {string} messageText 返信するメッセージ
+ * @param {string} message 返信するメッセージ
  * @return {Promise<void>} 非同期処理
  */
-async function replyMessage(replyToken, messageText) {
-  const url = "https://api.line.me/v2/bot/message/reply";
+export async function replyMessage(replyToken, message) {
+  const lineApiUrl = "https://api.line.me/v2/bot/message/reply";
   const headers = {
     "Content-Type": "application/json",
-    "Authorization":
-    `Bearer ${process.env.LINE_TOKEN || functions.config().line.token}`,
+    "Authorization": `Bearer {CHANNEL_ACCESS_TOKEN}`, // 必要なトークンを設定
   };
 
   const body = {
-    replyToken: replyToken,
-    messages: [{type: "text", text: messageText}],
+    replyToken,
+    messages: [{type: "text", text: message}],
   };
 
-  await axios.post(url, body, {headers});
+  await axios.post(lineApiUrl, body, {headers});
 }
 
-export default {replyMessage};
 

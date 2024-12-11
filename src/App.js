@@ -10,13 +10,13 @@ function App() {
   useEffect(() => {
     const initializeLiff = async () => {
       try {
-        await liff.init({ liffId: "2006630915-yWlPqLrB" }); // Replace 'YOUR_LIFF_ID' with your actual LIFF ID
+        await liff.init({ liffId: "2006630915-yWlPqLrB" }); // Replace with your actual LIFF ID
         if (!liff.isLoggedIn()) {
           liff.login();
         } else {
-          setIsLoggedIn(true);
           const profile = await liff.getProfile();
           setUserProfile(profile);
+          setIsLoggedIn(true);
         }
       } catch (error) {
         console.error("LIFF initialization failed:", error);
@@ -26,14 +26,20 @@ function App() {
     initializeLiff();
   }, []);
 
+  const handleLogout = () => {
+    liff.logout();
+    setIsLoggedIn(false);
+    setUserProfile(null);
+  };
+
   if (!isLoggedIn) {
-    return <p>Loading...</p>;
+    return <p className="loading">ログインしています...</p>;
   }
 
   return (
-    <div>
+    <div className="app">
       <AppRoutes userProfile={userProfile} />
-      <button onClick={() => liff.logout()}>Logout</button>
+      <button onClick={handleLogout}>Logout</button>
     </div>
   );
 }
