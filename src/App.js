@@ -4,17 +4,19 @@ import liff from "@line/liff";
 import "./styles.css";
 
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userProfile, setUserProfile] = useState(null);
 
   useEffect(() => {
     const initializeLiff = async () => {
       try {
-        await liff.init({ liffId: "2006630915-yWlPqLrB" }); // Replace 'YOUR_LIFF_ID' with your actual LIFF ID
+        // Initialize LIFF with the LIFF ID from environment variables
+        await liff.init({ liffId: process.env.REACT_APP_LIFF_ID });
+
+        // If not logged in, trigger login automatically
         if (!liff.isLoggedIn()) {
           liff.login();
         } else {
-          setIsLoggedIn(true);
+          // Fetch and set user profile if already logged in
           const profile = await liff.getProfile();
           setUserProfile(profile);
         }
@@ -26,14 +28,14 @@ function App() {
     initializeLiff();
   }, []);
 
-  if (!isLoggedIn) {
+  // Show loading state until userProfile is fetched
+  if (!userProfile) {
     return <p>Loading...</p>;
   }
 
   return (
     <div>
       <AppRoutes userProfile={userProfile} />
-      <button onClick={() => liff.logout()}>Logout</button>
     </div>
   );
 }
