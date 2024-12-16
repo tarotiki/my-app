@@ -1,0 +1,74 @@
+/* 基本のフォームスタイル */
+.prescription-form {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+  }
+  
+  .section {
+    margin-bottom: 30px;
+  }
+  
+  h2 {
+    font-size: 1.5em;
+    color: #333;
+  }
+  
+  label {
+    display: block;
+    margin: 10px 0;
+    font-size: 1em;
+  }
+  
+  input[type="text"],
+  input[type="tel"],
+  input[type="date"],
+  input[type="checkbox"] {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+  }
+  
+  button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    margin-top: 10px;
+  }
+  
+  button:hover {
+    background-color: #0056b3;
+  }
+  
+  /* エラーメッセージ */
+  .error {
+    color: red;
+    font-size: 0.9em;
+  }
+  
+  /* 各セクションに対するスタイル */
+  button[type="button"] {
+    background-color: #28a745;
+    border: none;
+  }
+  
+  button[type="button"]:hover {
+    background-color: #218838;
+  }
+  
+  /* 入力欄のカスタマイズ */
+  input[type="checkbox"] {
+    width: auto;
+    margin-right: 10px;
+  }
+  

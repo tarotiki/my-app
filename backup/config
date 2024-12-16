@@ -1,0 +1,9 @@
+[core]
+	repositoryformatversion = 0
+	filemode = true
+	bare = true
+	ignorecase = true
+	precomposeunicode = true
+[remote "backup"]
+	url = https://github.com/tarotiki/backup
+	fetch = +refs/heads/*:refs/remotes/backup/*
