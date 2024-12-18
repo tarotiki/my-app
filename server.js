@@ -1,60 +1,59 @@
-const express = require("express");
-const http = require("http");
-const { Server } = require("socket.io");
-const { google } = require("googleapis");
-const bodyParser = require("body-parser");
-const fs = require("fs");
+const express = require('express');
+const { google } = require('googleapis');
+const fs = require('fs');
+require('dotenv').config();
 
 const app = express();
-const server = http.createServer(app);
-const io = new Server(server);
+app.use(express.json());
 
-// JSONリクエストのパースを有効化
-app.use(bodyParser.json());
+// Google Sheets API の設定
+const SCOPES = ['https://www.googleapis.com/auth/spreadsheets'];
+const credentials = JSON.parse(fs.readFileSync('credentials.json'));
 
-// Google Sheets API 設定
+// 認証クライアントの作成
 const auth = new google.auth.GoogleAuth({
-    keyFile: "credentials.json", // サービスアカウントキーのファイルパス
-    scopes: ["https://www.googleapis.com/auth/spreadsheets"],
+  credentials,
+  scopes: SCOPES,
 });
 
-const SPREADSHEET_ID = "あなたのスプレッドシートID"; // ここにスプレッドシートIDを記述
+// スプレッドシートの操作関数
+async function appendToSheet(data) {
+  const client = await auth.getClient();
+  const sheets = google.sheets({ version: 'v4', auth: client });
+  const spreadsheetId = process.env.SPREADSHEET_ID; // 環境変数からスプレッドシートIDを取得
+  const range = 'Sheet1!A1:E1'; // 適宜変更
+  const valueInputOption = 'RAW';
 
-// フォームデータを保存するエンドポイント
+  await sheets.spreadsheets.values.append({
+    spreadsheetId,
+    range,
+    valueInputOption,
+    resource: {
+      values: [data],
+    },
+  });
+}
+
+// POST リクエストの受け取り
 app.post('/api/save-form', async (req, res) => {
-    try {
-        const { name, phone, postalCode, address, birthDate } = req.body;
-        console.log('リクエストデータ:', req.body); // リクエスト内容を確認
+  try {
+    const { name, phone, postalCode, address, birthDate } = req.body;
 
-        const doc = new GoogleSpreadsheet(SPREADSHEET_ID);
-        console.log('スプレッドシートを初期化しました');
-
-        // credentials.jsonのパスを指定
-        await doc.useServiceAccountAuth(require('./credentials.json'));
-        console.log('認証成功');
-
-        await doc.loadInfo();
-        console.log('スプレッドシート情報を読み込みました');
-
-        const sheet = doc.sheetsByIndex[0]; // 最初のシートを取得
-        console.log('シート取得成功');
-
-        await sheet.addRow({ Name: name, Phone: phone, PostalCode: postalCode, Address: address, BirthDate: birthDate });
-        console.log('データを追加しました');
-
-        res.status(200).send('データが保存されました');
-    } catch (error) {
-        console.error('エラー詳細:', error); // エラー詳細をログ出力
-        res.status(500).send('データの保存中にエラーが発生しました');
+    if (!name || !phone || !postalCode || !address || !birthDate) {
+      return res.status(400).send('すべてのフィールドを入力してください。');
     }
+
+    // データをスプレッドシートに追加
+    await appendToSheet([name, phone, postalCode, address, birthDate]);
+    res.status(200).send('データが保存されました！');
+  } catch (error) {
+    console.error('エラー:', error.message);
+    res.status(500).send('サーバーエラーが発生しました。');
+  }
 });
 
-
-// ルートエンドポイント
-app.get("/", (req, res) => {
-    res.send("サーバーが動作しています！");
-});
-
-server.listen(3000, () => {
-    console.log("サーバーが http://localhost:3000 で起動しました。");
+// サーバーの起動
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`Server is running on http://localhost:${PORT}`);
 });
